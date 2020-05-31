@@ -16,6 +16,7 @@ import org.example.config.Configuration
 import org.example.di.DependencyProvider
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
+import org.kodein.di.newInstance
 
 fun main(args: Array<String>) {
     val server = embeddedServer(Netty, port = 8080) {
@@ -31,7 +32,7 @@ fun main(args: Array<String>) {
         }
         routing {
             get("/articles") {
-                val usecase by kodein.instance<IArticleUsecase>()
+                val usecase by kodein.newInstance<IArticleUsecase> { ArticleUsecase(instance()) }
                 call.respond(usecase.getArticles().first())
             }
         }

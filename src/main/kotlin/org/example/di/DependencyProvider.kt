@@ -21,7 +21,6 @@ class DependencyProvider {
 
 private val articleDependency = Kodein.Module(name="dependency") {
     bind<IArticleRepository>() with singleton { ArticleRepository() }
-    bind<IArticleUsecase>() with singleton { ArticleUsecase(instance()) }
 }
 
 private val configurationDependency = Kodein.Module(name="configurationDependency") {
